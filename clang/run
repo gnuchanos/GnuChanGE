@@ -1,6 +1,0 @@
-#gcc main.c -o build/firstgame -O1 -Wall -std=c99 -I include/ -L lib -lraylib
-#gcc main.c -o build/firstgame.exe -O1 -Wall -std=c99 -I include/ -L lib -lraylib
-
-echo "this is c"
-gcc main.c -o debug && ./debug
-

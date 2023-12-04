@@ -1,0 +1,5 @@
+# this is linux build
+gcc main.c -o build/firstgame -O1 -Wall -std=c99 -I include/ -L lib -lraylib
+# this is windows build
+gcc main.c -o build/firstgame.exe -O1 -Wall -std=c99 -I include/ -L lib -lraylib
+./build/firstgame
