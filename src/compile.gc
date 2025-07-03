@@ -1,0 +1,5 @@
+rm Engine/gcEngineLib.so
+
+gcc -fPIC -shared -o Engine/gcEngine.so gcEngine.c -I/usr/include/python3.13 -lraylib -lpython3.13 -lm -ldl -lpthread -lrt -lGL
+gcc -fPIC -o Engine/gcEngine main.c -I/usr/include -lpython3.13
+
