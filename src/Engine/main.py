@@ -63,3 +63,6 @@ if __name__ == "__main__":
     gc = Game(1600, 900, "uWu")
 
 print(TwoNumber(10, 20))
+import sys
+print("Python executable:", sys.executable)
+print("Python sys.path:", sys.path)

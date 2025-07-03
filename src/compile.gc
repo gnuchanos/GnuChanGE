@@ -1,5 +1,24 @@
-rm Engine/gcEngineLib.so
+#!/bin/bash
 
-gcc -fPIC -shared -o Engine/gcEngine.so gcEngine.c -I/usr/include/python3.13 -lraylib -lpython3.13 -lm -ldl -lpthread -lrt -lGL
-gcc -fPIC -o Engine/gcEngine main.c -I/usr/include -lpython3.13
+# python3 -m venv Env
+# source pyEnv/bin/activate.fish 
 
+
+
+set -e  # Hata olursa çık
+
+rm -f Engine/gcEngine.so Engine/gcEngine
+
+# ➔ Shared library (.so) yapmak için:
+gcc -fPIC -shared -o Engine/gcEngine.so gcEngine.c \
+    -I/usr/include/python3.13 libraylib.a libpython3.13.a \
+    -lm -ldl -lpthread -lrt -lGL
+
+# ➔ Statik bağımsız çalıştırılabilir dosya:
+rm -f Engine/gcEngine.so Engine/gcEngine
+
+gcc -fPIC -shared -o Engine/gcEngine.so gcEngine.c \
+  -I/usr/include/python3.13 libraylib.a libpython3.13.a \
+  -lm -ldl -lpthread -lrt -lGL
+
+gcc -o Engine/gcEngine main.c libraylib.a -I/usr/include/python3.13 -lpython3.13 -lm -ldl -lpthread -lrt -lGL
