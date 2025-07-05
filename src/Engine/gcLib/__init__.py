@@ -3,7 +3,7 @@ import platform
 if platform.system() == "Windows":
     from . import gcLib_windows as gcLib
 else:
-    from . import gcLib_linux as gcLib
+    from . import gcLib_GnuLinux as gcLib
 
 PI = 3.14159265358979323846
 DEG2RAD = (PI/180.0)

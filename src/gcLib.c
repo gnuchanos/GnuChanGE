@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <python3.13/Python.h>
+#include <Python.h>
 #include "raylib.h"
 
 // This is extra custom fuctions
