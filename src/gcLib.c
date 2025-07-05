@@ -214,13 +214,13 @@ static PyMethodDef gcMethods[] = {
 
 static struct PyModuleDef gcModule = {
     PyModuleDef_HEAD_INIT,
-    "gcLib",
+    "gcLib_GnuLinux",
     "Test module with raylib bindings and misc functions",
     -1,
     gcMethods
 };
 
-PyMODINIT_FUNC PyInit_gcLib(void) {
+PyMODINIT_FUNC PyInit_gcLib_GnuLinux(void) {
     printf("It's working YEY\n");
     return PyModule_Create(&gcModule);
 }

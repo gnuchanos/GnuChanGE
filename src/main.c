@@ -13,7 +13,7 @@ int main(int argc, char *argv[]) {
 
     // Gömülü Python dizinini ve çalıştırılabilir dosyayı doğru ayarla
     wchar_t *home = Py_DecodeLocale("./Python", NULL);
-    wchar_t *program = Py_DecodeLocale("./Python/bin/python3", NULL);
+    wchar_t *program = Py_DecodeLocale("./gcRunner", NULL);
 
     config.home = home;
     config.program_name = program;
