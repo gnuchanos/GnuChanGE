@@ -3,22 +3,27 @@
 # python3 -m venv Env
 # source pyEnv/bin/activate.fish 
 
+# for winSHIT
+# sudo pacman -S mingw-w64-gcc
+# yay -Sy mingw-w64-python313-bin
+
+
+
 
 
 set -e  # Hata olursa çık
 
-rm -f Engine/gcEngine.so Engine/gcEngine
+rm -f Engine/gcLib.so Engine/gcRunner
 
 # ➔ Shared library (.so) yapmak için:
-gcc -fPIC -shared -o Engine/gcEngine.so gcEngine.c \
-    -I/usr/include/python3.13 libraylib.a libpython3.13.a \
-    -lm -ldl -lpthread -lrt -lGL
+gcc -fPIC -shared -o Engine/gcLib/gcLib_GnuLinux.so gcLib.c -I/usr/include/python3.13 libraylib.a libpython3.13.a -lm -ldl -lpthread -lrt -lGL
 
-# ➔ Statik bağımsız çalıştırılabilir dosya:
-rm -f Engine/gcEngine.so Engine/gcEngine
+# i don't like it but f...
+x86_64-w64-mingw32-gcc -shared -o Engine/gcLib/gcLib_WinFart.pyd gcLib.c -I/path/to/windows/python/include -L/path/to/windows/python/libs -lpython3X
 
-gcc -fPIC -shared -o Engine/gcEngine.so gcEngine.c \
-  -I/usr/include/python3.13 libraylib.a libpython3.13.a \
-  -lm -ldl -lpthread -lrt -lGL
 
-gcc -o Engine/gcEngine main.c libraylib.a -I/usr/include/python3.13 -lpython3.13 -lm -ldl -lpthread -lrt -lGL
+
+gcc -o Engine/gcRunner main.c libraylib.a -I/usr/include/python3.13 -lpython3.13 -lm -ldl -lpthread -lrt -lGL
+
+# i don't like this
+x86_64-w64-mingw32-gcc -o Engine/gcRunner.exe main.c libraylib.a -I/path/to/python/include -L/path/to/python/libs -lpython313 -lopengl32 -lws2_32 -lwinmm -lmsvcrt

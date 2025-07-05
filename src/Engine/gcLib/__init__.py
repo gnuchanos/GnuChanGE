@@ -1,17 +1,31 @@
-from . import gcEngine
+import platform
 
+if platform.system() == "Windows":
+    from . import gcLib_windows as gcLib
+else:
+    from . import gcLib_linux as gcLib
 
-# this is i don't know
-class TwoNumber:
-    def __init__(self, a, b):
-        self.a = a
-        self.b = b
-        self.result = gcEngine.TwoNumber(a, b)
+PI = 3.14159265358979323846
+DEG2RAD = (PI/180.0)
+RAD2DEG = (180.0/PI)
 
-    def __repr__(self):
-        return f"{self.a} + {self.b} = {self.result}"
+class gcVector2:
+    def __init__(self, X: float, Y: float):
+        self.X = X
+        self.Y = Y
 
-# extra functions
+class gcVector3:
+    def __init__(self, X: float, Y: float, Z: float):
+        self.X = X
+        self.Y = Y
+        self.Z = Z
+
+class gcVector4:
+    def __init__(self, X: float, Y: float, Z: float, W: float):
+        self.X = X
+        self.Y = Y
+        self.Z = Z
+        self.W = W
 
 class gcRGBA:
     def __init__(self, R: int, G: int, B: int, A: int):
@@ -24,33 +38,67 @@ class gcRGBA:
     def Get(self):
         return [self.R, self.G, self.B, self.A]
 
+# this is i don't know
+class TwoNumber:
+    def __init__(self, a, b):
+        self.a = a
+        self.b = b
+
+    @property
+    def Get(self):
+        return gcLib.TwoNumber(self.a, self.b)
+
+class gcRandomNumber_Int:
+    def __init__(self, Min: int, Max: int):
+        self.Min = Min
+        self.Max = Max
+    
+    @property
+    def Get(self):
+        return gcLib.gc_GetRandomValue_int(self.Min, self.Max)
+
+class gcRandomNumber_Float:
+    def __init__(self, Min: int, Max: int):
+        self.Min = Min
+        self.Max = Max
+    
+    @property
+    def Get(self):
+        return gcLib.gc_GetRandomValue_float(self.Min, self.Max)
+
+# extra functions
+
+
+
 class gcSetTargetFPS:
     def __init__(self, FPS: int):
         self.FPS = FPS
     
     def Set(self):
-        gcEngine.gc_SetTargetFPS(self.FPS)
+        gcLib.gc_SetTargetFPS(self.FPS)
+
+
 
 # raylib binding
 
 class gcInitWindow:
     def __init__(self, Width: int, Height: int, Title: str):
-        gcEngine.gc_InitWindow(Width, Height, Title)
+        gcLib.gc_InitWindow(Width, Height, Title)
 
 class gcWindowShouldClose:
     def IsClose(self):
-        return gcEngine.gc_WindowShouldClose()
+        return gcLib.gc_WindowShouldClose()
 
 class gcBeginDrawing:
     def Start(self):
-        gcEngine.gc_BeginDrawing()
+        gcLib.gc_BeginDrawing()
 
 class gcClearBackground:
     def __init__(self, RGBA: gcRGBA):
         self.RGBA = RGBA
 
     def Get(self):
-        gcEngine.gc_ClearBackground(self.RGBA.R, self.RGBA.G, self.RGBA.B, self.RGBA.A)
+        gcLib.gc_ClearBackground(self.RGBA.R, self.RGBA.G, self.RGBA.B, self.RGBA.A)
 
 # 0xFF000000
 class gcDrawText:
@@ -62,7 +110,7 @@ class gcDrawText:
         self.Color = [Color.A, Color.G, Color.B, Color.A]
 
     def Draw(self):
-        gcEngine.gc_DrawText(self.Text, self.X, self.Y, self.Size, self.Color)
+        gcLib.gc_DrawText(self.Text, self.X, self.Y, self.Size, self.Color)
 
 class gcDrawFPS:
     def __init__(self, X: int, Y: int):
@@ -70,7 +118,7 @@ class gcDrawFPS:
         self.Y = Y
     
     def Draw(self):
-        gcEngine.gc_DrawFPS(self.X, self.Y)
+        gcLib.gc_DrawFPS(self.X, self.Y)
 
 
 
@@ -79,11 +127,11 @@ class gcDrawFPS:
 # End Drawing and Close Window
 class gcEndDrawing:
     def End(self):
-        gcEngine.gc_EndDrawing()
+        gcLib.gc_EndDrawing()
 
 class gcCloseWindow:
     def Now(self):
-        gcEngine.gc_CloseWindow()
+        gcLib.gc_CloseWindow()
 
 
 
