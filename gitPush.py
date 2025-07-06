@@ -18,7 +18,7 @@ for file_path in files_to_add:
 # Değişiklik var mı kontrol et
 status = subprocess.run(["git", "status", "--porcelain"], capture_output=True, text=True)
 if status.stdout.strip():
-    commit_message = "Auto: Add all Python embedded files"
+    commit_message = "new day new bugs"
     subprocess.run(["git", "commit", "-m", commit_message], check=True)
     subprocess.run(["git", "push"], check=True)
 else:
