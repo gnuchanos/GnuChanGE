@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# libimagequant and tk must install for running gnuchangui
+
+# python3 -m venv Python
+# source /SSD/Github/GnuChanGE/src/Engine/Python/bin/activate.fish 
+# /SSD/Github/GnuChanGE/src/Engine/Python/bin/python -m pip
+
+# I'm trying to make this standalone engine like you don't need extra python or raylib in system everything is bundle.
+
+rm -f Engine/gcLib.so Engine/gcRunner
+
+# ➔ Shared library (.so):
+gcc -fPIC -shared -o Engine/gcLib/gcLib_GnuLinux.so gcLib.c -I/usr/include/python3.13 libraylib.a libpython3.13.a -lm -ldl -lpthread -lrt -lGL
+
+# runner i hope works standalone now
+gcc -o Engine/gcRunner main.c libraylib.a -I/usr/include/python3.13 -L/usr/lib -Wl,-rpath='$ORIGIN/Python/lib' -lpython3.13 -lm -ldl -lpthread -lrt -lGL
+
+
+
